@@ -298,6 +298,17 @@ export const formatRegistry = new Registry<FormatRegistryItem>(() => {
         return encodeURIStrict(value);
       },
     },
+    {
+      id: VariableFormatID.Underline,
+      name: 'underline',
+      description: 'Convert strikethrough to underline',
+      formatter: (value) => {
+        if (isArray(value) && value.length > 1) {
+          return '{' + value.map(str => String(str).replace(/-/g, "_")).join(',') + '}';
+        }
+        return String(value).replace(/-/g, "_");
+      },
+    },
   ];
 
   return formats;
